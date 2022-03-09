@@ -1,14 +1,24 @@
 const express = require("express");
+const productRouter = require('./roter/products');
 const app = express();
 
-app.get("/", (req, res) => {
-   res.send("<h1>Home Page</h1>")
+app.use(express.json());
+
+
+// app.get("/", (req, res) => {
+//    res.send("<h1>Home Page</h1>")
+// });
+// Routing
+app.use("/api", productRouter);
+
+const PORT = 3001;
+
+app.listen(PORT, () => {
+    console.log(`Server đang chạy cổng ${PORT}`);
 });
 
-app.get("/api/products", (req, res) => {
-  const products = [{id: 1, name:"dai"},{id: 2, name:"duy"}];
-  res.json(products);
-});
+
+ 
 
 
 // const http = require('http');
@@ -30,8 +40,3 @@ app.get("/api/products", (req, res) => {
 //  }
 // });
 
-const PORT = 3001;
-
-app.listen(PORT, () => {
-    console.log(`Server đang chạy cổng ${PORT}`);
-});
