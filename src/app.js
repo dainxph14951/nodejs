@@ -1,25 +1,23 @@
-const express = require("express");
-const productRouter = require('./roter/products');
+// const express = require("express");
+import express from 'express';
+import productRouter from './roters/product';
+import mongoose from 'mongoose';
 const app = express();
-
+// middleware
 app.use(express.json());
 
-
-// app.get("/", (req, res) => {
-//    res.send("<h1>Home Page</h1>")
-// });
 // Routing
-app.use("/api", productRouter);
+app.use('/api', productRouter);
 
-const PORT = 3001;
-
+// connect database
+mongoose
+                     .connect("mongodb://127.0.0.1:27017/dbnamw")
+                      .then(() => console.log('Connect db thanh cong'));
+// Connect
+const PORT = 27017;
 app.listen(PORT, () => {
-    console.log(`Server đang chạy cổng ${PORT}`);
+  console.log(`Server đang chạy cổng ${PORT}`);
 });
-
-
- 
-
 
 // const http = require('http');
 
@@ -39,4 +37,3 @@ app.listen(PORT, () => {
 //     res.end();
 //  }
 // });
-

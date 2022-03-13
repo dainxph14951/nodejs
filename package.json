@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./src/app.js"
+    "beautiful": "lint-staged",
+    "start": "nodemon ./src/app.js --exec babel-node -e js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,26 @@
     "url": "https://github.com/dainxph14951/nodejs/issues"
   },
   "homepage": "https://github.com/dainxph14951/nodejs#readme",
+
+    "lint-staged": {
+      "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab--width 4 --write"
+    },
+    "husky": {
+      "hooks": {
+      "pre-commit": "lint-staged"
+      }
+    },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.5"
   }
 }
