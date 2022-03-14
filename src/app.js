@@ -11,10 +11,10 @@ app.use('/api', productRouter);
 
 // connect database
 mongoose
-                     .connect("mongodb://127.0.0.1:27017/dbnamw")
-                      .then(() => console.log('Connect db thanh cong'));
+  .connect('mongodb://127.0.0.1:27017/dbnamw')
+  .then(() => console.log('Connect db thanh cong'));
 // Connect
-const PORT = 27017;
+const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server đang chạy cổng ${PORT}`);
 });

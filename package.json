@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "beautiful": "lint-staged",
+    "beautiful": "prettier --single-quote --trailing-comma all --tab--width 4 --write src/**/*.{js,json,scss}",
     "start": "nodemon ./src/app.js --exec babel-node -e js"
   },
   "repository": {
@@ -18,15 +18,6 @@
     "url": "https://github.com/dainxph14951/nodejs/issues"
   },
   "homepage": "https://github.com/dainxph14951/nodejs#readme",
-
-    "lint-staged": {
-      "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab--width 4 --write"
-    },
-    "husky": {
-      "hooks": {
-      "pre-commit": "lint-staged"
-      }
-    },
   "devDependencies": {
     "husky": "^7.0.4",
     "lint-staged": "^12.3.5",

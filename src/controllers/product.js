@@ -1,17 +1,29 @@
-import mongoose from 'mongoose';
-const Product = mongoose.model('Product', { name: String });
+import Product from '../models/producrs';
 
-export const list = (req, res) => {
+export const list = async (req, res) => {
   // get all
-  res.json(products);
-  false;
+  try {
+    const products = await Product.find().exec();
+    res.json(products);
+  } catch (error) {
+    res.status(400).json({
+      message: 'Hiện sản phẩm không thành công',
+    });
+  }
 };
-export const get = (req, res) => {
+export const get = async (req, res) => {
   // get a product
-  const result = products.find((item) => item.id === +req.params.id);
-  res.json(result);
+  try {
+    const products = await Product.findOne({ _id: req.param.id }).exec();
+    res.json(products);
+  } catch (error) {
+    res.status(400).json({
+      message: 'Thêm sản phẩm không thành công',
+    });
+  }
 };
 export const create = async (req, res) => {
+  console.log(req.body);
   // create product
   try {
     const product = await new Product(req.body).save();
@@ -22,15 +34,34 @@ export const create = async (req, res) => {
     });
   }
 };
-export const remove = (req, res) => {
+export const remove = async (req, res) => {
   // delete product
-  const newProducts = products.filter((item) => item.id !== +req.params.id);
-  res.json(newProducts);
+  try {
+    const products = await Product.findOneAndDelete({
+      _id: req.params.id,
+    }).exec();
+    res.json(products);
+  } catch (error) {
+    res.status(400).json({
+      message: 'Xóa sản phẩm không thành công',
+    });
+  }
 };
-export const update = (req, res) => {
+export const update = async (req, res) => {
   // update product
-  const newProducts = products.map((item) =>
-    item.id === +req.params.id ? req.body : item,
-  );
-  res.json(newProducts);
+  const condition = { _id: req.params.id };
+  const update = req.body;
+  const optional = { new: true };
+  try {
+    const products = await Product.findOneAndUpdate(
+      condition,
+      update,
+      optional,
+    ).exec();
+    res.json(products);
+  } catch (error) {
+    res.status(400).json({
+      message: 'update sản phẩm không thành công',
+    });
+  }
 };
