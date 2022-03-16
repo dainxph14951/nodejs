@@ -5,10 +5,19 @@ const productSchema  = mongoose.Schema(
     name: {
       type: String,
       required: true,
-      minLength: 5,
+    },
+    slug:{
+      type: String,
+      lowercase: true,
+      unique: true,
+      index: true
     },
     price: {
       type: Number,
+      required: true,
+    },
+    category: {
+      type: Object,
       required: true,
     },
   },

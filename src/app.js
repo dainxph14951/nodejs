@@ -2,12 +2,17 @@
 import express from 'express';
 import productRouter from './roters/product';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import categoryRouter from './roters/category';
 const app = express();
+
 // middleware
 app.use(express.json());
+app.use(cors());
 
 // Routing
 app.use('/api', productRouter);
+app.use('/api', categoryRouter);
 
 // connect database
 mongoose
